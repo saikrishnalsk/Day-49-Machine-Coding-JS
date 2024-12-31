@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throttle Demo</title>
+    <style>
+        body {
+            height: 2000px;
+            font-family: Arial;
+            padding: 20px;
+        }
+        #logger {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            background: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .log-entry {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="logger">
+        <h3>Scroll Events Log</h3>
+        <div id="log"></div>
+    </div>
+
+    <h1>Scroll down to test throttling</h1>
+    <p>Events are throttled to once per second</p>
+
+    <script>
+        let inThrottle = false;
+        const logDiv = document.getElementById('log');
+
+        window.addEventListener('scroll', () => {
+            if (!inThrottle) {
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                entry.textContent = `Scroll: ${window.scrollY}px`;
+                logDiv.prepend(entry);
+
+                inThrottle = true;
+                setTimeout(() => {
+                    inThrottle = false;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

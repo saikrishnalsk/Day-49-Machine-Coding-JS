@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .carousel {
+            width: 300px;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: 0.3s;
+        }
+        .slide {
+            min-width: 300px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1> Carousel </h1>
+    <div class="carousel">
+        <div class="slides">
+            <div class="slide">1</div>
+            <div class="slide">2</div>
+            <div class="slide">3</div>
+        </div>
+    </div>
+    
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+
+    <script>
+        let position = 0;
+        const slides = document.querySelector('.slides');
+
+        function next() {
+            position = position > -600 ? position - 300 : 0;
+            slides.style.transform = `translateX(${position}px)`;
+        }
+
+        function prev() {
+            position = position < 0 ? position + 300 : -600;
+            slides.style.transform = `translateX(${position}px)`;
+        }
+    </script>
+</body>
+</html>
